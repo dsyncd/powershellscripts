@@ -1,0 +1,3 @@
+$computers = Get-ADComputer -Filter * -SearchBase "OU=Computers,DC=domain,DC=local" | Select-Object -expandproperty name 
+  foreach ($computer in $computers)
+  { Stop-Computer -ComputerName $computer -Force} 
