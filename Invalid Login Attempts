@@ -1,0 +1,3 @@
+#  Shows if someone is trying to brute force.  Shows login failures.  Created by Chas Daugherty.
+
+Get-Eventlog –ComputerName ([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).FindDomainController() “Security” -InstanceID “4625” -Message *”username”* | Format-List Timegenerated, Message | Out-File –filepath ‘c:\log.csv’
