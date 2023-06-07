@@ -1,0 +1,9 @@
+# Random commands that get settings and formats results in powershell.  Doesn't export but it could.  Run them individually.
+
+Get-WebServicesVirtualDirectory | select server,externalurl,internalurl | fl
+Get-ActiveSyncVirtualDirectory | select server,externalurl,internalurl | fl
+Get-OabVirtualDirectory | Select Server,ExternalURL,InternalURL | fl
+Get-ECPVirtualDirectory | Select Server,ExternalURL,InternalURL | fl
+Get-OwaVirtualDirectory | Select Server,ExternalURL,InternalURL | fl
+Get-OutlookAnywhere | Select Server,ExternalHostname,Internalhostname
+Get-ClientAccessServer | Select Name,AutoDiscoverServiceInternalURI | fl
