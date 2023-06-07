@@ -1,0 +1,3 @@
+#Run as admin from AD powershell module.  Or import it.  Looks to see if password never expires.  Created by Chas Daugherty.
+
+Get-ADUser -filter * -properties passwordlastset, passwordneverexpires, enabled | sort-object name | select-object Name, passwordlastset, passwordneverexpires, enabled | Export-csv -path c:\info.csv
