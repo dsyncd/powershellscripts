@@ -1,0 +1,3 @@
+# Created by Chas Daugherty.
+
+Get-ADComputer –filter * -Searchbase "cn=computers, dc=Contoso,dc=com" | foreach{ Invoke-GPUpdate –computer $_.name -force}
