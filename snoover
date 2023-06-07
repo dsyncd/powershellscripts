@@ -1,0 +1,236 @@
+<# This form was created using POSHGUI.com  a free online gui designer for PowerShell
+.NAME
+    Snoover
+    Designed/Scripted by: Chas Daugherty
+#>
+
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.Application]::EnableVisualStyles()
+
+$Form                            = New-Object system.Windows.Forms.Form
+$Form.ClientSize                 = '690,600'
+$Form.text                       = "Snoover"
+$Form.TopMost                    = $false
+
+$cbOU                            = New-Object system.Windows.Forms.ComboBox
+$cbOU.text                       = "Select an OU"
+$cbOU.width                      = 150
+$cbOU.height                     = 20
+$cbOU.location                   = New-Object System.Drawing.Point(17,18)
+$cbOU.Font                       = 'Microsoft Sans Serif,10'
+
+$gbSU                            = New-Object system.Windows.Forms.Groupbox
+$gbSU.height                     = 175
+$gbSU.width                      = 200
+$gbSU.text                       = "Update Software"
+$gbSU.location                   = New-Object System.Drawing.Point(25,55)
+
+$cbFirefox                       = New-Object system.Windows.Forms.CheckBox
+$cbFirefox.text                  = "Firefox"
+$cbFirefox.AutoSize              = $false
+$cbFirefox.width                 = 95
+$cbFirefox.height                = 20
+$cbFirefox.location              = New-Object System.Drawing.Point(8,19)
+$cbFirefox.Font                  = 'Microsoft Sans Serif,10'
+
+$cbChrome                        = New-Object system.Windows.Forms.CheckBox
+$cbChrome.text                   = "Chrome"
+$cbChrome.AutoSize               = $false
+$cbChrome.width                  = 95
+$cbChrome.height                 = 20
+$cbChrome.location               = New-Object System.Drawing.Point(8,41)
+$cbChrome.Font                   = 'Microsoft Sans Serif,10'
+
+$cbPaint                         = New-Object system.Windows.Forms.CheckBox
+$cbPaint.text                    = "Paint"
+$cbPaint.AutoSize                = $false
+$cbPaint.width                   = 95
+$cbPaint.height                  = 20
+$cbPaint.location                = New-Object System.Drawing.Point(8,61)
+$cbPaint.Font                    = 'Microsoft Sans Serif,10'
+
+$cbJava                          = New-Object system.Windows.Forms.CheckBox
+$cbJava.text                     = "Java"
+$cbJava.AutoSize                 = $false
+$cbJava.width                    = 95
+$cbJava.height                   = 20
+$cbJava.location                 = New-Object System.Drawing.Point(8,81)
+$cbJava.Font                     = 'Microsoft Sans Serif,10'
+
+$cbAdobe                         = New-Object system.Windows.Forms.CheckBox
+$cbAdobe.text                    = "Adobe"
+$cbAdobe.AutoSize                = $false
+$cbAdobe.width                   = 95
+$cbAdobe.height                  = 20
+$cbAdobe.location                = New-Object System.Drawing.Point(8,101)
+$cbAdobe.Font                    = 'Microsoft Sans Serif,10'
+
+$btnUpdate                       = New-Object system.Windows.Forms.Button
+$btnUpdate.text                  = "Update"
+$btnUpdate.width                 = 70
+$btnUpdate.height                = 30
+$btnUpdate.location              = New-Object System.Drawing.Point(122,19)
+$btnUpdate.Font                  = 'Microsoft Sans Serif,10'
+
+$cb7zip                          = New-Object system.Windows.Forms.CheckBox
+$cb7zip.text                     = "7 Zip"
+$cb7zip.AutoSize                 = $false
+$cb7zip.width                    = 95
+$cb7zip.height                   = 20
+$cb7zip.location                 = New-Object System.Drawing.Point(8,121)
+$cb7zip.Font                     = 'Microsoft Sans Serif,10'
+
+$cbVLC                           = New-Object system.Windows.Forms.CheckBox
+$cbVLC.text                      = "VLC"
+$cbVLC.AutoSize                  = $false
+$cbVLC.width                     = 95
+$cbVLC.height                    = 20
+$cbVLC.location                  = New-Object System.Drawing.Point(8,141)
+$cbVLC.Font                      = 'Microsoft Sans Serif,10'
+
+$dgOnline                       = New-Object system.Windows.Forms.DataGridView
+$dgOnline.width                 = 215
+$dgOnline.height                = 250
+$dgOnline.location              = New-Object System.Drawing.Point(226,48)
+$dgOnline.AutoSize              = $false
+$dgOnline.ColumnCount           = 1
+
+$dgOffline                        = New-Object system.Windows.Forms.DataGridView
+$dgOffline.width                  = 215
+$dgOffline.height                 = 250
+$dgOffline.location               = New-Object System.Drawing.Point(457,48)
+$dgOffline.AutoSize               = $false
+$dgOffline.ColumnCount            = 1
+
+$lblOnline                       = New-Object system.Windows.Forms.Label
+$lblOnline.text                  = "Online Computers"
+$lblOnline.AutoSize              = $true
+$lblOnline.width                 = 25
+$lblOnline.height                = 10
+$lblOnline.location              = New-Object System.Drawing.Point(226,18)
+$lblOnline.Font                  = 'Microsoft Sans Serif,10'
+
+$lblOffline                      = New-Object system.Windows.Forms.Label
+$lblOffline.text                 = "Offline Computers"
+$lblOffline.AutoSize             = $true
+$lblOffline.width                = 25
+$lblOffline.height               = 10
+$lblOffline.location             = New-Object System.Drawing.Point(457,16)
+$lblOffline.Font                 = 'Microsoft Sans Serif,10'
+
+$btnGetInfo                      = New-Object system.Windows.Forms.Button
+$btnGetInfo.text                 = "Get Info"
+$btnGetInfo.width                = 100
+$btnGetInfo.height               = 30
+$btnGetInfo.location             = New-Object System.Drawing.Point(22,275)
+$btnGetInfo.Font                 = 'Microsoft Sans Serif,10'
+
+$panInfo                         = New-Object system.Windows.Forms.Panel
+$panInfo.height                  = 180
+$panInfo.width                   = 650
+$panInfo.location                = New-Object System.Drawing.Point(22,311)
+
+$btnGetComputers                 = New-Object system.Windows.Forms.Button
+$btnGetComputers.text            = "Get Computers"
+$btnGetComputers.width           = 150
+$btnGetComputers.height          = 30
+$btnGetComputers.location        = New-Object System.Drawing.Point(22,240)
+$btnGetComputers.Font            = 'Microsoft Sans Serif,10'
+
+
+$Form.controls.AddRange(@($cbOU,$gbSU,$dgOffline,$lblOffline,$dgOnline,$lblOnline,$btnGetInfo,$btnGetComputers,$panInfo))
+$gbSU.controls.AddRange(@($cbFirefox,$cbChrome,$cbPaint,$cbJava,$cbAdobe,$btnUpdate,$cb7zip,$cbVLC))
+
+
+#Write your logic code here
+$Form.Topmost = $True
+$cbOU.Sorted = $True
+#this pulls from AD OUs
+$grabOU = Get-ADOrganizationalUnit -Filter 'Name -like "*"' | select -ExpandProperty Name | ForEach-Object {[void] $cbOU.Items.Add($_)}
+
+
+$btnUpdate.Add_Click({ 
+
+#filters on the OU selected
+$OU = "OU="
+#replace this with your organization's AD distinguished name.
+$base = ",DC=blah,DC=local"
+#combines
+$sb = $OU+($cbOU.text)+$base
+#computers added to array
+$computers = Get-ADComputer -Filter * -SearchBase $sb | Select-Object -expandproperty name 
+
+
+#function for looping through computers and updating them based on what's selected
+foreach ($computer in $computers) {
+    if (test-Connection -Cn $computer -quiet) {
+        #test if choco isn't installed.  If not, it will install it.  If it's installed, it will try to upgrade to latest version.
+        #$testchoco = powershell choco -v
+        #$chocoinstall = Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        if((Invoke-command -Computername $computer -ScriptBlock {powershell.exe choco -v}) -eq $null){
+            Invoke-command -Computername $computer -ScriptBlock { Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) } -AsJob 
+            
+
+        }
+        else { 
+
+        #installs updates based on options selected       
+        If ($cbFirefox.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade firefox -y} -AsJob
+        }
+        If ($cbChrome.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade googlechrome -y} -AsJob
+        }
+
+        If ($cbPaint.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade paint.net -y} -AsJob
+        }
+
+        If ($cbJava.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade jre8 -y} -AsJob
+        }
+
+        If ($cbAdobe.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade adobereader -y} -AsJob
+        }
+
+        If ($cbVLC.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade vlc -y} -AsJob
+        }
+
+        If ($cb7zip.Checked -eq $true){
+            Invoke-command -Computername $computer -ScriptBlock {choco upgrade 7zip -y} -AsJob
+        }
+        $dgOnline.Rows.Add($computer)
+        
+        Invoke-command -Computername $computer -ScriptBlock {choco upgrade chocolatey -y} -AsJob 
+        }
+      }
+      else { 
+         
+        $dgOffline.Rows.Add($computer)
+         
+      }
+}})    
+
+
+$btnGetComputers.Add_Click({ 
+#filters on the OU selected
+$OU = "OU="
+#replace this with your organization's AD distinguished name.
+$base = ",DC=blah,DC=local"
+#combines
+$sb = $OU+($cbOU.text)+$base
+#computers added to array
+$computers = Get-ADComputer -Filter * -SearchBase $sb | Select-Object -expandproperty name 
+foreach ($computer in $computers) {
+    if (test-Connection -Cn $computer -quiet) {
+        $dgOnline.Rows.Add($computer)
+        }
+      else {$dgOffline.Rows.Add($computer)}
+}})    
+
+
+
+
+[void]$Form.ShowDialog()
