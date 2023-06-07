@@ -1,0 +1,11 @@
+# Exports account lockout events into a CSV or Text to track down where they are coming from.  
+# If there's no source, then they are trying to login through a VPN or something else that's AD integrated.
+# I've found infected servers and open ports with this.  Can take a while to run depending on log size.  
+# Advanced auditing GPO will need to be setup to record events correctly.  - Created by Chas Daugherty
+
+
+Get-Eventlog –ComputerName ([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).FindDomainController() “Security” -InstanceID “4740” -Message *”cdaugherty”* | Format-List Timegenerated, Message | Out-File –filepath ‘c:\lockout.txt’
+
+# Another one
+
+Get-EventLog -LogName Security | ?{$_.message -like "*locked*cdaugherty*"} | fl -property * | Out-File –filepath ‘c:\lockout.csv’
