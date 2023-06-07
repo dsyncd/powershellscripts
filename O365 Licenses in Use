@@ -1,0 +1,9 @@
+# Office365 classifies there license types by names when working in powershell.  There are resources out there that classify them.
+# This just exports everyone into a text or csv file based on F1 and E1 list. 
+
+
+F1:
+get-msoluser –All | where-object {($_.licenses).accountskuid -match "corp:desklesspack"} | Out-file C:\F1.txt
+
+E1:
+get-msoluser -All | where-object {($_.licenses).accountskuid -match "corp:standardpack"} | Export-CSV C:\E1.csv
