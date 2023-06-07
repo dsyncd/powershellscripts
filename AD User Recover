@@ -1,0 +1,3 @@
+# Recovers deleted AD user.  
+
+Get-ADObject -Filter {displayName -eq 'Chas Daugherty'} -IncludeDeletedObjects | Restore-ADObject
