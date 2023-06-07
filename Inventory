@@ -1,0 +1,12 @@
+$computers = Get-ADComputer -Filter * -SearchBase "OU=Workstations,DC=blah,DC=local" | Select-Object -expandproperty name
+  
+foreach ($computer in $computers) {
+    if (test-Connection -Cn $computer -quiet) {
+        write-host $computer
+        Invoke-Command -computername $computer -scriptblock { Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate } |  Export-Csv C:\SoftwareReports\$computer.csv
+        write-host "Success"
+      }
+      else { 
+         write-host $computer "Fail"
+      }
+} 
