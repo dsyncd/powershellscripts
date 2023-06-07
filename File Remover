@@ -1,0 +1,32 @@
+#Created to remove Bookmarks on all office computers matching 'help desk.url'.  Created by Chas Daugherty.
+
+function removelink(){ 
+
+    $folders = Get-ChildItem "C:\Users" -Directory
+
+    foreach ($folder in $folders) {
+        $linkpath = $folder.fullname + "\Favorites\Links\"
+        #write-host $linkpath
+        #$file = Get-ChildItem $linkpath -filter 'help desk.url' | Remove-Item -WhatIf
+        $file = Get-ChildItem $linkpath -filter 'help desk.url' | Remove-Item
+        #write-host $file
+             
+
+    }
+
+}
+
+
+$computers = Get-ADComputer -Filter * -SearchBase "OU=comptuers,DC=domain,DC=local" | Select-Object -expandproperty name
+
+
+foreach ($computer in $computers) {
+    if (test-Connection -Cn $computer -quiet) {
+        write-host $computer
+        Invoke-command -Computername $computer -ScriptBlock ${function:removelink} 
+        write-host "Success"
+      }
+      else { 
+         write-host $computer "Fail"
+      }
+}     
