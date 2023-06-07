@@ -1,0 +1,22 @@
+#Loops through OU with computers in it and runs the upgrade command for Chocolatey.  Created by Chas Daugherty.
+
+function chocolatey(){ 
+   choco upgrade googlechrome -y
+   choco upgrade firefox -y
+   choco upgrade vlc -y
+   break
+    
+}
+ 
+$computers = Get-ADComputer -Filter * -SearchBase "OU=Corp Comptuers,DC=corp,DC=local" | Select-Object -expandproperty name
+  
+foreach ($computer in $computers) {
+    if (test-Connection -Cn $computer -quiet) {
+        write-host $computer
+        Invoke-command -Computername $computer -ScriptBlock ${function:chocolatey} 
+        write-host "Success"
+      }
+      else { 
+         write-host $computer "Fail"
+      }
+}    
